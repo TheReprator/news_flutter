@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 1423,
+  "articles": [
+    {
+      "source": {
+        "id": "the-verge",
+        "name": "The Verge"
+      },
+      "author": "Alex Cranz",
+      "title": "Google lost its first antitrust case, so what happens next?",
+      "description": "On The Vergecast: The DOJ vs Google, Elon Musk’s very latest silly lawsuit, and a TV shootout.",
+      "url": "https://www.theverge.com/2024/8/9/24216708/google-lost-antitrust-elon-musk-sues-advertisers",
+      "urlToImage": "https://cdn.vox-cdn.com/thumbor/J3jyp3b9hZM0IdK36-GPEZtHCwM=/0x0:2040x1360/1200x628/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/25565509/VST_0809_Site.jpg",
+      "publishedAt": "2024-08-09T17:40:34Z",
+      "content": "Illustration by Cath Virginia / The Verge\r\n\n \n\n Google might be having a big Pixel phone event next week, but this week the company had to reckon with a major loss to the Department of Justice, who f… [+2236 chars]"
+    },
+    {
+      "source": {
+        "id": "techcrunch",
+        "name": "TechCrunch"
+      },
+      "author": "Ingrid Lunden",
+      "title": "UK's Riverlane scores $75M to correct quantum errors | TechCrunch",
+      "description": "Quantum computing may still largely be in the theoretical domain, but the money that it’s attracting is very real.",
+      "url": "https://techcrunch.com/2024/08/05/uks-riverlane-scores-75m-to-correct-quantum-errors/",
+      "urlToImage": "https://techcrunch.com/wp-content/uploads/2023/01/GettyImages-1393513219.jpg?resize=1200,568",
+      "publishedAt": "2024-08-06T06:41:11Z",
+      "content": "Quantum computing may still largely be in the theoretical domain, but the money that its attracting is very real. Riverlane, a specialist in quantum error correction technology, has raised $75 millio… [+4485 chars]"
+    }
+  ]
+}
