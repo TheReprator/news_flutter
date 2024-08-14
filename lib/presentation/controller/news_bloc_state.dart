@@ -10,7 +10,7 @@ sealed class NewsState with _$NewsState {
   const factory NewsState.init() = NewsStateInit;
 
   const factory NewsState.loading() = NewsStateLoading;
-  const factory NewsState.error(Exception e) = NewsStateError;
+  const factory NewsState.error(Exception exception) = NewsStateError;
   const factory NewsState.empty() = NewsStateEmpty;
   const factory NewsState.paginatedMore() = NewsStatePaginatedMore;
   const factory NewsState.paginatedError(Exception e) = NewsStatePaginatedError;

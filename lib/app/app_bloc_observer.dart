@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:news_flutter/util/logger.dart';
 
-@injectable
+@Injectable(as: BlocObserver)
 class AppBlocObserver extends BlocObserver {
   AppBlocObserver(this._logger);
 
@@ -14,6 +14,7 @@ class AppBlocObserver extends BlocObserver {
     Transition<Object?, Object?> transition,
   ) {
     final buffer = StringBuffer()
+      ..writeln('On Transition :')
       ..write('Bloc: ${bloc.runtimeType} | ')
       ..writeln('${transition.event.runtimeType}')
       ..write('Transition: ${transition.currentState.runtimeType}')
@@ -36,7 +37,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     _logger.info(
-      'Bloc: ${bloc.runtimeType} | ${change.currentState} | ${change.nextState}',
+      'Bloc onChange: ${bloc.runtimeType} | ${change.currentState} | ${change.nextState}',
     );
     super.onChange(bloc, change);
   }
