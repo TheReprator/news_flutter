@@ -27,8 +27,7 @@ class NewsDatasourceRemoteImpl implements NewsDataSource {
       final List<EntityNews> itemList =
           await _apiService.getHeadLines(sources, page, pageSize);
       return AppSuccess(_mapper.mapToList(itemList, sources));
-    } on ChopperHttpException catch (error, stacktrace) {
-      _logger.debug(stacktrace);
+    } on ChopperHttpException catch (error) {
       _logger.debug(error);
 
       String errorMessage;
@@ -41,8 +40,7 @@ class NewsDatasourceRemoteImpl implements NewsDataSource {
           errorMessage = 'An error occurred';
       }
       return AppFailure(Exception(errorMessage));
-    } on Exception catch (error, stacktrace) {
-      _logger.debug(stacktrace);
+    } on Exception catch (error) {
       _logger.debug(error);
 
       return AppFailure(Exception('An error occurred'));

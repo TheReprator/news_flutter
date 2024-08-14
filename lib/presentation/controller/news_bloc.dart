@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:news_flutter/domain/modals/modal_news.dart';
-import 'package:news_flutter/domain/usecases/new_usecase.dart';
+import 'package:news_flutter/domain/usecases/news_usecase.dart';
 import 'package:news_flutter/presentation/controller/news_bloc_event.dart';
 import 'package:news_flutter/presentation/controller/news_bloc_state.dart';
 import 'package:news_flutter/presentation/controller/news_holder.dart';
