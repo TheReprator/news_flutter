@@ -1,8 +1,10 @@
+import 'package:chopper/chopper.dart';
 import 'package:injectable/injectable.dart';
 import 'package:news_flutter/data/datasource/news_datasource.dart';
 import 'package:news_flutter/data/repository/remote/entity/entity_news.dart';
 import 'package:news_flutter/data/repository/remote/mapper/news_mapper.dart';
 import 'package:news_flutter/di/impl/network/api_service.dart';
+import 'package:news_flutter/di/impl/network/entity_error.dart';
 import 'package:news_flutter/domain/modals/modal_news.dart';
 import 'package:news_flutter/util/app_result_container.dart';
 import 'package:news_flutter/util/logger.dart';
@@ -25,13 +27,25 @@ class NewsDatasourceRemoteImpl implements NewsDataSource {
       final List<EntityNews> itemList =
           await _apiService.getHeadLines(sources, page, pageSize);
       return AppSuccess(_mapper.mapToList(itemList, sources));
+    } on ChopperHttpException catch (error, stacktrace) {
+      _logger.debug(stacktrace);
+      _logger.debug(error);
+
+      String errorMessage;
+      final errorObject = error.response.error;
+      switch (errorObject) {
+        case EntityError():
+          errorMessage = errorObject.message ?? '';
+          break;
+        default:
+          errorMessage = 'An error occurred';
+      }
+      return AppFailure(Exception(errorMessage));
     } on Exception catch (error, stacktrace) {
       _logger.debug(stacktrace);
-      return Future.delayed(Duration(seconds: 10), () async {
-        // do something here
-        return AppFailure(error);
-        // do stuff
-      });
+      _logger.debug(error);
+
+      return AppFailure(Exception('An error occurred'));
     }
   }
 }
