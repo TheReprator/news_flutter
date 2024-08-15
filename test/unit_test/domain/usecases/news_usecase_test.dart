@@ -28,9 +28,12 @@ void main() {
         await newsUseCase(testResponseNewsCategory, 1, 20);
     expect(appContainerResult, isA<AppSuccess>());
 
-    final newsList =
-        (appContainerResult as AppSuccess<List<ModalNews>, Exception>).value;
-    expect(newsList.length, 1);
-    expect(newsList.first.author, testResponseNewsAuthor);
+    final newsList = (appContainerResult as AppSuccess<List<ModalNews>>).data;
+
+    expect(
+        newsList,
+        isA<List<ModalNews>>()
+            .having((l) => l.length, 'length', 1)
+            .having((l) => l.first.author, 'author', testResponseNewsAuthor));
   });
 }

@@ -10,6 +10,8 @@ import 'package:news_flutter/util/app_result_container.dart';
 import 'package:news_flutter/util/logger.dart';
 import 'package:news_flutter/util/mapper.dart';
 
+const genericError = 'An error occurred';
+
 @named
 @Injectable(as: NewsDataSource)
 class NewsDatasourceRemoteImpl implements NewsDataSource {
@@ -21,7 +23,7 @@ class NewsDatasourceRemoteImpl implements NewsDataSource {
   final Mapper<EntityNews, String, ModalNews> _mapper;
 
   @override
-  Future<AppResult<List<ModalNews>, Exception>> getNews(
+  Future<AppResult<List<ModalNews>>> getNews(
       String sources, int page, int pageSize) async {
     try {
       final List<EntityNews> itemList =
@@ -37,13 +39,13 @@ class NewsDatasourceRemoteImpl implements NewsDataSource {
           errorMessage = errorObject.message ?? '';
           break;
         default:
-          errorMessage = 'An error occurred';
+          errorMessage = genericError;
       }
-      return AppFailure(Exception(errorMessage));
+      return AppFailure(errorMessage);
     } on Exception catch (error) {
       _logger.debug(error);
 
-      return AppFailure(Exception('An error occurred'));
+      return const AppFailure(genericError);
     }
   }
 }

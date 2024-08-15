@@ -30,8 +30,7 @@ void main() {
 
     expect(appContainerResult, isA<AppSuccess>());
 
-    final newsList =
-        (appContainerResult as AppSuccess<List<ModalNews>, Exception>).value;
+    final newsList = (appContainerResult as AppSuccess<List<ModalNews>>).data;
     expect(newsList.length, 1);
     expect(newsList.first.author, testResponseNewsAuthor);
   });

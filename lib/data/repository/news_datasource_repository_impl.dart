@@ -14,7 +14,7 @@ class NewsDatasourceRepositoryImpl implements NewsRepository {
   final NewsDataSource _newsDataSourceRemote;
 
   @override
-  Future<AppResult<List<ModalNews>, Exception>> getNews(
+  Future<AppResult<List<ModalNews>>> getNews(
           String sources, int page, int pageSize) =>
       _newsDataSourceRemote.getNews(sources, page, pageSize);
 }

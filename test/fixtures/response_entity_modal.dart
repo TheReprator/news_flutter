@@ -2,6 +2,7 @@ import 'package:news_flutter/data/repository/remote/entity/entity_news.dart';
 import 'package:news_flutter/di/impl/network/entity_error.dart';
 import 'package:news_flutter/domain/modals/modal_news.dart';
 
+const testResponseExceptionMessage = 'An error occurred';
 const testResponseSourceId = '1';
 const testResponseSourceName = 'google';
 const testResponseNewsAuthor = 'vikram';

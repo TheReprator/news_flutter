@@ -1,13 +1,9 @@
-sealed class AppResult<S, E extends Exception> {
-  const AppResult();
-}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-final class AppSuccess<S, E extends Exception> extends AppResult<S, E> {
-  const AppSuccess(this.value);
-  final S value;
-}
+part 'app_result_container.freezed.dart';
 
-final class AppFailure<S, E extends Exception> extends AppResult<S, E> {
-  const AppFailure(this.exception);
-  final E exception;
+@freezed
+sealed class AppResult<T> with _$AppResult<T> {
+  const factory AppResult.success(T data) = AppSuccess;
+  const factory AppResult.error(String message) = AppFailure;
 }

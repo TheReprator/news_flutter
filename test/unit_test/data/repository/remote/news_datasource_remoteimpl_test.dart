@@ -33,8 +33,7 @@ void main() {
         await newsDataSource.getNews(testResponseNewsCategory, 1, 20);
     expect(appContainerResult, isA<AppSuccess>());
 
-    final newsList =
-        (appContainerResult as AppSuccess<List<ModalNews>, Exception>).value;
+    final newsList = (appContainerResult as AppSuccess<List<ModalNews>>).data;
     expect(newsList.length, 1);
     expect(newsList.first.author, testResponseNewsAuthor);
   });
@@ -48,7 +47,7 @@ void main() {
           await newsDataSource.getNews(testResponseNewsCategory, 1, 20);
 
       // Assert
-      expect(appContainerResult, isA<AppFailure<List<ModalNews>, Exception>>());
+      expect(appContainerResult, isA<AppFailure<List<ModalNews>>>());
     });
 
     test('chopper error', () async {
@@ -62,12 +61,10 @@ void main() {
       final appContainerResult =
           await newsDataSource.getNews(testResponseNewsCategory, 1, 20);
 
-      expect(appContainerResult, isA<AppFailure<List<ModalNews>, Exception>>());
+      expect(appContainerResult, isA<AppFailure<List<ModalNews>>>());
 
-      final failResult =
-          appContainerResult as AppFailure<List<ModalNews>, Exception>;
-      expect(failResult.exception.toString(),
-          'Exception: $testResponseErrorMissingKey');
+      final failResult = appContainerResult as AppFailure;
+      expect(failResult.message, testResponseErrorMissingKey);
     });
   });
 }

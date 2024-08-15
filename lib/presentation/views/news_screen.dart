@@ -19,13 +19,13 @@ class NewsScreen extends StatelessWidget {
             case NewsStateInit() || NewsStateLoading():
               return _widgetLoading;
             case NewsStateError(exception: final error):
-              return _widgetError(error);
+              return _widgetError(error.toString());
             case NewsStateEmpty():
               return const Text('empty');
             case NewsStatePaginatedMore():
               return const Text('Load more');
             case NewsStatePaginatedError():
-              return Text('paginated error');
+              return const Text('paginated error');
             case NewsStateContent(data: final data):
               return Text('Data length: ${data.length}');
           }
@@ -36,7 +36,7 @@ class NewsScreen extends StatelessWidget {
         child: CircularProgressIndicator(),
       );
 
-  Widget _widgetError(Exception e) => Center(
-        child: Text("Something went wrong. ${e.toString()}"),
+  Widget _widgetError(String message) => Center(
+        child: Text(message),
       );
 }
