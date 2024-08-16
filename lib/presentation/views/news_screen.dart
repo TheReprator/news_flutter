@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_flutter/di/di.dart';
+import 'package:news_flutter/domain/modals/modal_news.dart';
 import 'package:news_flutter/presentation/controller/news_bloc.dart';
 import 'package:news_flutter/presentation/controller/news_bloc_event.dart';
 import 'package:news_flutter/presentation/controller/news_bloc_state.dart';
@@ -27,7 +28,7 @@ class NewsScreen extends StatelessWidget {
             case NewsStatePaginatedError():
               return const Text('paginated error');
             case NewsStateContent(data: final data):
-              return Text('Data length: ${data.length}');
+              return _widgetNewsList(data);
           }
         }));
   }
@@ -39,4 +40,9 @@ class NewsScreen extends StatelessWidget {
   Widget _widgetError(String message) => Center(
         child: Text(message),
       );
+
+  Widget _widgetNewsList(final List<ModalNews> data) =>
+      ListView.builder(itemBuilder: (BuildContext context, int index) {
+        return Text(data[index].description);
+      });
 }
