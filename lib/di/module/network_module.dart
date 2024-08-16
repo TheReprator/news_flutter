@@ -25,7 +25,6 @@ abstract class NetworkModule {
   String get apiKey => app_enviorment.Environment.apiKey;
 
   @lazySingleton
-  @injectable
   ChopperClient chopperClient(
           @Named(_namedApiUrl) String baseUrl,
           @Named(_namedSerializer) BuiltValueConverter converter,
@@ -33,6 +32,7 @@ abstract class NetworkModule {
       ChopperClient(
           baseUrl: Uri.parse(baseUrl),
           interceptors: interceptorList,
+          errorConverter: converter,
           converter: converter);
 
   @Named(_namedInterceptorList)

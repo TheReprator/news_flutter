@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:news_flutter/domain/modals/modal_news.dart';
-import 'package:news_flutter/domain/usecases/new_usecase.dart';
+import 'package:news_flutter/domain/usecases/news_usecase.dart';
 import 'package:news_flutter/presentation/controller/news_bloc_event.dart';
 import 'package:news_flutter/presentation/controller/news_bloc_state.dart';
 import 'package:news_flutter/presentation/controller/news_holder.dart';
@@ -23,16 +23,16 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   Future<void> _getNewsCommon(
     Emitter<NewsState> emit, {
     required Function() callBackInit,
-    required Function(Exception e) callBackError,
+    required Function(String e) callBackError,
     emptyResultCallBack,
   }) async {
     callBackInit();
 
-    final AppResult<List<ModalNews>, Exception> resultContainer =
+    final AppResult<List<ModalNews>> resultContainer =
         await _newsUseCase(_newsHolder.newsCategory, _newsHolder.pageFetched);
 
     switch (resultContainer) {
-      case AppSuccess(value: List<ModalNews> data):
+      case AppSuccess(data: List<ModalNews> data):
         {
           if (data.isEmpty) {
             emptyResultCallBack();
@@ -43,7 +43,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
           }
         }
         break;
-      case AppFailure(exception: Exception e):
+      case AppFailure(message: String e):
         {
           callBackError(e);
         }
@@ -56,10 +56,10 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       emit(const NewsStateLoading());
       _newsHolder.clearModalData(event.category);
       _newsHolder = _newsHolder.copyWith(newsCategory: event.category);
-    }, callBackError: (Exception e) {
-      emit(NewsState.error(e));
+    }, callBackError: (String e) {
+      emit(NewsStateError(e));
     }, emptyResultCallBack: () {
-      emit(const NewsState.empty());
+      emit(const NewsStateEmpty());
     });
   }
 
@@ -67,16 +67,18 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       NewsEventLoadMore event, Emitter<NewsState> emit) async {
     await _getNewsCommon(emit, callBackInit: () {
       emit(const NewsState.paginatedMore());
-    }, callBackError: (Exception e) {
+    }, callBackError: (String e) {
       emit(NewsState.paginatedError(e));
     }, emptyResultCallBack: () {});
   }
 
   void _retry(NewsEventRetry event, Emitter<NewsState> emit) async {
     await _getNewsCommon(emit, callBackInit: () {
-      emit(const NewsState.paginatedMore());
-    }, callBackError: (Exception e) {
-      emit(NewsState.paginatedError(e));
-    }, emptyResultCallBack: () {});
+      emit(const NewsStateLoading());
+    }, callBackError: (String e) {
+      emit(NewsStateError(e));
+    }, emptyResultCallBack: () {
+      emit(const NewsStateEmpty());
+    });
   }
 }
