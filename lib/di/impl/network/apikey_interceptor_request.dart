@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:chopper/chopper.dart';
 
@@ -10,7 +11,11 @@ class ApikeyInterceptorRequest implements Interceptor {
   @override
   FutureOr<Response<BodyType>> intercept<BodyType>(
       Chain<BodyType> chain) async {
-    final request = applyHeader(chain.request, 'apikey', apiKey);
+    final headers = {
+      'Authorization': apiKey,
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
+    };
+    final request = applyHeaders(chain.request, headers);
     return chain.proceed(request);
   }
 }

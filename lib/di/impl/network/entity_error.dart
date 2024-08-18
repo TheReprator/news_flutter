@@ -8,6 +8,7 @@ abstract class EntityError implements Built<EntityError, EntityErrorBuilder> {
 
   String? get code;
   String? get message;
+  String? get status;
 
   factory EntityError([void Function(EntityErrorBuilder)? updates]) =
       _$EntityError;

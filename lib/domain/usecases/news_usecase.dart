@@ -12,7 +12,7 @@ class NewsUseCase {
 
   final NewsRepository _newsRepository;
 
-  Future<AppResult<List<ModalNews>, Exception>> call(String sources, int page,
+  Future<AppResult<List<ModalNews>>> call(String sources, int page,
           [int pageSize = _pageSize]) =>
       _newsRepository.getNews(sources, page, pageSize);
 }

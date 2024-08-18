@@ -20,10 +20,11 @@ class NewsHolder {
 
   NewsHolder copyWith(
       {List<ModalNews>? newsList, String? newsCategory, int? pageFetched}) {
-    if (null == newsList)
+    if (null == newsList) {
       this.newsList;
-    else
+    } else {
       this.newsList.addAll(newsList);
+    }
 
     return NewsHolder(
       newsList: this.newsList,
