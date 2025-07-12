@@ -12,3 +12,7 @@
     flutter run --dart-define server_url=https://mywonderfulserver.development.com
     or
     flutter run --dart-define-from-file=api-keys.json
+
+
+# Clean build
+    flutter pub cache clean

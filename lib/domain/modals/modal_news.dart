@@ -4,15 +4,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'modal_news.freezed.dart';
 
 @freezed
-class ModalSource with _$ModalSource {
-  const factory ModalSource({
-    required String id,
-    required String name,
-  }) = _ModalSource;
+abstract class ModalSource with _$ModalSource {
+  const factory ModalSource({required String id, required String name}) =
+      _ModalSource;
 }
 
 @freezed
-class ModalNews with _$ModalNews {
+abstract class ModalNews with _$ModalNews {
   const factory ModalNews({
     required ModalSource source,
     required String author,
