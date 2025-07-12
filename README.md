@@ -14,5 +14,21 @@
     flutter run --dart-define-from-file=api-keys.json
 
 
-# Clean build
+# Clear the Pub Cache
     flutter pub cache clean
+
+# Clean build
+    flutter clean
+
+# Rebuild
+    flutter pub get
+    flutter run 
+
+# Rebuild Macos/IOs 
+    go into ios folder
+    delete the Podfile.lock file
+    rm -rf Pods
+    pod cache clean --all
+    pod deintegrate
+    pod setup
+    pod install
